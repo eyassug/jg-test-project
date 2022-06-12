@@ -53,7 +53,13 @@ namespace Jibble.HttpApi
 
             // Configure DbContext
             services.AddDbContext<EmployeeDbContext>(
-                    options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+                    options => options.UseSqlServer(Configuration.GetConnectionString("Default"), sqlServerOptionsAction: sqlOptions =>
+                    {
+                        sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 3,
+                        maxRetryDelay: TimeSpan.FromSeconds(10),
+                        errorNumbersToAdd: null);
+                    }));
 
             services.ConfigureRepositories();
             services.ConfigureMediatR();
