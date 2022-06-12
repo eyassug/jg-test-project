@@ -7,6 +7,8 @@ using Jibble.DTOs;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using System.Threading;
+using AutoMapper;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Jibble.Controllers
@@ -16,22 +18,17 @@ namespace Jibble.Controllers
     public class EmployeeController : ControllerBase
     {
         IEmployeeRepository Repository {get;}
-        public EmployeeController(IEmployeeRepository repository) => Repository = repository;
+        IMapper Mapper { get; }
+        public EmployeeController(IEmployeeRepository repository, IMapper mapper) => (Repository, Mapper) = (repository, mapper);
 
         [HttpGet]
         [ProducesResponseType(200)]
-        public async Task<PagedResultDto<EmployeeDto>> GetAsync([FromQuery] PagedRequestDto request)
+        public async Task<PagedResultDto<EmployeeDto>> GetAsync([FromQuery] PagedRequestDto request, CancellationToken cancellationToken)
         {
             var queryable = await Repository.GetQueryableAsync();
             //TODO: Change to AutoMapper
-            var results = await queryable.Skip(request.SkipCount).Take(request.MaxResultCount).Select(x => new EmployeeDto
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                DateOfBirth = x.DateOfBirth
-            }).ToListAsync();
-            return new PagedResultDto<EmployeeDto>(await queryable.CountAsync(), results);
+            var results = await Repository.GetPagedListAsync(request.SkipCount, request.MaxResultCount, cancellationToken);
+            return new PagedResultDto<EmployeeDto>(await Repository.GetCountAsync(cancellationToken), Mapper.Map<List<Employee>, List<EmployeeDto>>(results));
         }
 
         [HttpGet("{id}")]
@@ -40,16 +37,10 @@ namespace Jibble.Controllers
         public async Task<EmployeeDto> Get(int id)
         {
             var result = await Repository.GetAsync(id);
-            if (result == null) 
+            if (result == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
-                
-            return new EmployeeDto
-            {
-                Id = result.Id,
-                FirstName = result.FirstName,
-                LastName = result.LastName,
-                DateOfBirth = result.DateOfBirth
-            };
+
+            return Mapper.Map<EmployeeDto>(result);
         }
 
         [HttpPut("{id}")]

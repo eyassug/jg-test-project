@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Hangfire;
 using Microsoft.Extensions.Configuration;
+using AutoMapper;
 
 namespace Jibble
 {
@@ -13,6 +14,19 @@ namespace Jibble
         {
             services.AddScoped<Employees.IEmployeeRepository, Employees.EmployeeRepository>();
             services.AddScoped<ICSVImportService, CSVImportService>();
+        }
+
+        public static void ConfigureAutomapper(this IServiceCollection services)
+        {
+            // Auto Mapper Configurations
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
         }
 
         public static void ConfigureMediatR(this IServiceCollection services)
