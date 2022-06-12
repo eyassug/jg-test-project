@@ -12,7 +12,15 @@ namespace Jibble
 {
     public class EmployeeDbContext : DbContext
     {
-        
+        public EmployeeDbContext()
+        {
+
+        }
+
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+            => options.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=employeedb;Trusted_Connection=True;"); // TODO: Replace with environment connection string
+
         public DbSet<Employee> Employees { get; set; }
     }
 }
