@@ -1,5 +1,6 @@
 ﻿using Jibble.Employees;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Paillave.Etl.Core;
 using Paillave.Etl.FileSystem;
 using Paillave.Etl.SqlServer;
@@ -15,14 +16,15 @@ namespace Jibble.Services
     public class CSVImportService : ICSVImportService
     {
         IConfiguration Configuration { get; }
-        public CSVImportService(IConfiguration configuration)
+        ILogger Logger { get; }
+        public CSVImportService(IConfiguration configuration, ILogger<CSVImportService> logger)
         {
             Configuration = configuration;
+            Logger = logger;
         }
         public async Task ProcessAsync(string folderName, CancellationToken cancellationToken = default)
         {
-            Console.WriteLine($"Starting import - {folderName}");
-            //TODO: Get this from Configuration
+            Logger.LogInformation($"Starting import - {folderName}");
             var connectionString = Configuration.GetConnectionString("Default");
             var processRunner = StreamProcessRunner.Create<string>(DefineProcess);
             processRunner.DebugNodeStream += (sender, e) => { /* place a conditional breakpoint here for debug */ };
@@ -34,9 +36,9 @@ namespace Jibble.Services
                     Resolver = new SimpleDependencyResolver().Register(cnx),
                 };
                 var res = await processRunner.ExecuteAsync(folderName, executionOptions);
-                Console.Write(res.Failed ? "Failed" : "Succeeded");
+                Logger.LogInformation(res.Failed ? "Failed" : "Succeeded");
                 if (res.Failed)
-                    Console.Write($"{res.ErrorTraceEvent.NodeName}({res.ErrorTraceEvent.NodeTypeName}):{res.ErrorTraceEvent.Content.Message}");
+                    Logger.LogTrace($"{res.ErrorTraceEvent.NodeName}({res.ErrorTraceEvent.NodeTypeName}):{res.ErrorTraceEvent.Content.Message}");
             }
         }
 
