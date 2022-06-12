@@ -27,12 +27,18 @@ namespace Jibble.HttpApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers(options => options.Filters.Add(new HttpResponseExceptionFilter()));
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(new HttpResponseExceptionFilter());
+                options.Filters.Add(new OperationCancelledExceptionFilter());
+            });
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Jibble.HttpApi", Version = "v1" });
             });
+
+            services.ConfigureRepositories();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
