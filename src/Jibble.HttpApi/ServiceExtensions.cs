@@ -11,7 +11,6 @@ namespace Jibble
     {
         public static void ConfigureRepositories(this IServiceCollection services)
         {
-            services.AddScoped<EmployeeDbContext>();
             services.AddScoped<Employees.IEmployeeRepository, Employees.EmployeeRepository>();
             services.AddScoped<ICSVImportService, CSVImportService>();
         }

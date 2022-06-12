@@ -1,4 +1,5 @@
 ﻿using Jibble.Employees;
+using Microsoft.Extensions.Configuration;
 using Paillave.Etl.Core;
 using Paillave.Etl.FileSystem;
 using Paillave.Etl.SqlServer;
@@ -13,11 +14,16 @@ namespace Jibble.Services
 {
     public class CSVImportService : ICSVImportService
     {
+        IConfiguration Configuration { get; }
+        public CSVImportService(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
         public async Task ProcessAsync(string folderName, CancellationToken cancellationToken = default)
         {
             Console.WriteLine($"Starting import - {folderName}");
             //TODO: Get this from Configuration
-            var connectionString = @"Server=localhost\SQLEXPRESS;Database=employeedb;Trusted_Connection=True;";
+            var connectionString = Configuration.GetConnectionString("Default");
             var processRunner = StreamProcessRunner.Create<string>(DefineProcess);
             processRunner.DebugNodeStream += (sender, e) => { /* place a conditional breakpoint here for debug */ };
             using (var cnx = new SqlConnection(connectionString))

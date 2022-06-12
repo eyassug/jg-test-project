@@ -1,6 +1,7 @@
 ﻿using Jibble.Employees;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,15 +14,10 @@ namespace Jibble
 {
     public class EmployeeDbContext : DbContext
     {
-        public EmployeeDbContext()
+        public EmployeeDbContext(DbContextOptions<EmployeeDbContext> options) : base(options)
         {
 
         }
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=employeedb;Trusted_Connection=True;"); // TODO: Replace with environment connection string
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>()
