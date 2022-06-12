@@ -51,5 +51,15 @@ namespace Jibble.Employees
             await Context.SaveChangesAsync(cancellationToken);
             return employee;
         }
+
+        public async Task<long> GetCountAsync(CancellationToken cancellationToken = default)
+        {
+            return await Context.Employees.CountAsync(cancellationToken);
+        }
+
+        public async Task<List<Employee>> GetPagedListAsync(int skipCount, int maxResultCount, CancellationToken cancellationToken = default)
+        {
+            return await Context.Employees.OrderBy(x => x.Id).Skip(skipCount).Take(maxResultCount).ToListAsync(cancellationToken);
+        }
     }
 }

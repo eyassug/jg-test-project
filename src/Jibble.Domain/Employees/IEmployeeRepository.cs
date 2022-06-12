@@ -17,5 +17,11 @@ namespace Jibble.Employees
         Task<Employee> UpdateAsync(Employee employee, CancellationToken cancellationToken = default);
         Task<IEnumerable<Employee>> GetListAsync(Expression<Func<Employee, bool>> predicate, CancellationToken cancellationToken = default);
         Task DeleteAsync(int id, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Gets total count of all entities.
+        /// </summary>
+        Task<long> GetCountAsync(CancellationToken cancellationToken = default);
+
+        Task<List<Employee>> GetPagedListAsync(int skipCount, int maxResultCount, CancellationToken cancellationToken = default);
     }
 }
