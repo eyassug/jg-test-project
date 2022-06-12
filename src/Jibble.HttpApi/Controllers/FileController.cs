@@ -34,18 +34,8 @@ namespace Jibble.Controllers
                 if (!extension.Equals(".zip") && !extension.Equals(".csv"))
                     throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest, "Invalid file type");
 
-                var folderName = Path.Combine("files", $"{Guid.NewGuid()}");
-                if (!Directory.Exists(folderName)) Directory.CreateDirectory(folderName);
-                var fileName = Path.Combine(folderName, Path.GetFileName(file.FileName));
-                Console.WriteLine($"Uploading {fileName}");
-                var filePath = fileName;
-                await Mediator.Send(new Commands.UploadFileCommand { FileInfo = file });
-                using (var stream = System.IO.File.Create(filePath))
-                {
-                    await file.CopyToAsync(stream, cancellationToken);
-                }
-                await ImportService.ProcessAsync(folderName, cancellationToken);
-                return Ok(fileName);
+                var folderName = await Mediator.Send(new Commands.UploadFileCommand { File = file }, cancellationToken);
+                return Ok(folderName);
             }
             throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);
         }
