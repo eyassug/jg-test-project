@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Hangfire;
+using Hangfire.Dashboard;
 
 namespace Jibble.HttpApi
 {
@@ -40,6 +42,8 @@ namespace Jibble.HttpApi
 
             services.ConfigureRepositories();
             services.ConfigureMediatR();
+            // Hangfire
+            services.ConfigureHangfire(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +66,11 @@ namespace Jibble.HttpApi
             {
                 endpoints.MapControllers();
             });
+            app.UseHangfireDashboard("/jobs", new DashboardOptions
+            {
+                IsReadOnlyFunc = (DashboardContext context) => true
+            });
+
         }
     }
 }

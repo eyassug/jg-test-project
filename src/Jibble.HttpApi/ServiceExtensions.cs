@@ -2,6 +2,8 @@
 using Jibble.Services;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Hangfire;
+using Microsoft.Extensions.Configuration;
 
 namespace Jibble
 {
@@ -17,6 +19,15 @@ namespace Jibble
         public static void ConfigureMediatR(this IServiceCollection services)
         {
             services.AddMediatR(typeof(Startup));
+        }
+
+        public static void ConfigureHangfire(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHangfire(x =>
+            {
+                x.UseSqlServerStorage(configuration.GetConnectionString("Default"));
+            });
+            services.AddHangfireServer();
         }
     }
 }
