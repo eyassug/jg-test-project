@@ -25,7 +25,7 @@ namespace Jibble.Controllers
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
         [RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue)] // 500Mb
-        [RequestSizeLimit(209715200)]
+        [RequestSizeLimit(int.MaxValue)]
         public async Task<IActionResult> PostAsync(IFormFile file, CancellationToken cancellationToken)
         {
             if (file.Length > 0)
