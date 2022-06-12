@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  jibble.httpapi:
+    image: ${DOCKER_REGISTRY-}jibblehttpapi
+    build:
+      context: .
+      dockerfile: src/Jibble.HttpApi/Dockerfile
+    depends_on:
+      - db
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      SA_PASSWORD: "jibble"
+      ACCEPT_EULA: "Y"
