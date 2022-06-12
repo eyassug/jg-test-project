@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jibble.Domain", "src\Jibble.Domain\Jibble.Domain.csproj", "{9D1ED4A8-6FC6-425E-930A-BB3A711EBA8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{03C12EF0-A849-4167-BD08-571088C8AC6B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9378EA38-C225-436D-B78C-9C9752523130}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jibble.EntityFrameworkCore", "src\Jibble.EntityFrameworkCore\Jibble.EntityFrameworkCore.csproj", "{BC506096-4E25-44FE-8531-055F8DB579D0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jibble.HttpApi", "src\Jibble.HttpApi\Jibble.HttpApi.csproj", "{2744517A-7CED-45E2-A1DB-E47CA1FE646C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jibble.EntityFrameworkCore.Tests", "test\Jibble.EntityFrameworkCore.Tests\Jibble.EntityFrameworkCore.Tests.csproj", "{FDDB01FA-3CAA-456D-A2A6-E347FD5D820C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jibble.HttpApi.Tests", "test\Jibble.HttpApi.Tests\Jibble.HttpApi.Tests.csproj", "{6187C477-CA7E-4DEA-8702-E451E6AB4A21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D1ED4A8-6FC6-425E-930A-BB3A711EBA8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D1ED4A8-6FC6-425E-930A-BB3A711EBA8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D1ED4A8-6FC6-425E-930A-BB3A711EBA8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D1ED4A8-6FC6-425E-930A-BB3A711EBA8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC506096-4E25-44FE-8531-055F8DB579D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC506096-4E25-44FE-8531-055F8DB579D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC506096-4E25-44FE-8531-055F8DB579D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC506096-4E25-44FE-8531-055F8DB579D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2744517A-7CED-45E2-A1DB-E47CA1FE646C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2744517A-7CED-45E2-A1DB-E47CA1FE646C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2744517A-7CED-45E2-A1DB-E47CA1FE646C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2744517A-7CED-45E2-A1DB-E47CA1FE646C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDDB01FA-3CAA-456D-A2A6-E347FD5D820C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDDB01FA-3CAA-456D-A2A6-E347FD5D820C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDDB01FA-3CAA-456D-A2A6-E347FD5D820C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDDB01FA-3CAA-456D-A2A6-E347FD5D820C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6187C477-CA7E-4DEA-8702-E451E6AB4A21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6187C477-CA7E-4DEA-8702-E451E6AB4A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6187C477-CA7E-4DEA-8702-E451E6AB4A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6187C477-CA7E-4DEA-8702-E451E6AB4A21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9D1ED4A8-6FC6-425E-930A-BB3A711EBA8D} = {03C12EF0-A849-4167-BD08-571088C8AC6B}
+		{BC506096-4E25-44FE-8531-055F8DB579D0} = {03C12EF0-A849-4167-BD08-571088C8AC6B}
+		{2744517A-7CED-45E2-A1DB-E47CA1FE646C} = {03C12EF0-A849-4167-BD08-571088C8AC6B}
+		{FDDB01FA-3CAA-456D-A2A6-E347FD5D820C} = {9378EA38-C225-436D-B78C-9C9752523130}
+		{6187C477-CA7E-4DEA-8702-E451E6AB4A21} = {9378EA38-C225-436D-B78C-9C9752523130}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {951A22C4-41E9-49A7-8059-80236A093704}
+	EndGlobalSection
+EndGlobal
