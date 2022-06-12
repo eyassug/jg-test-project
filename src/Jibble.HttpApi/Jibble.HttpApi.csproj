@@ -3,9 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Jibble</RootNamespace>
+    <UserSecretsId>a5228330-05d4-4ce0-a645-536daa6b26bd</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Paillave.EtlNet.EntityFrameworkCore" Version="2.0.4" />
     <PackageReference Include="Paillave.EtlNet.FileSystem" Version="2.0.4" />
     <PackageReference Include="Paillave.EtlNet.SqlServer" Version="2.0.4" />
