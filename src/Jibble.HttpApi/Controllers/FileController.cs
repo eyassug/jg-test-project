@@ -11,6 +11,11 @@ namespace Jibble.Controllers
     [ApiController]
     public class FileController : ControllerBase
     {
+        Services.ICSVImportService ImportService { get; }
+        public FileController(Services.ICSVImportService cSVImportService)
+        {
+            ImportService = cSVImportService;
+        }
         // POST api/files
         [HttpPost]
         [ProducesResponseType(200)]
@@ -22,14 +27,21 @@ namespace Jibble.Controllers
         {
             if (file.Length > 0)
             {
-                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                var extension = Path.GetExtension(file.FileName);
+                if (!extension.Equals(".zip") && !extension.Equals(".csv"))
+                    throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest, "Invalid file type");
+
+                var folderName = Path.Combine("files", $"{Guid.NewGuid()}");
+                if (!Directory.Exists(folderName)) Directory.CreateDirectory(folderName);
+                var fileName = Path.Combine(folderName, Path.GetFileName(file.FileName));
                 Console.WriteLine($"Uploading {fileName}");
-                var filePath = Path.Combine("files", Path.GetFileName(file.FileName));
+                var filePath = fileName;
 
                 using (var stream = System.IO.File.Create(filePath))
                 {
                     await file.CopyToAsync(stream, cancellationToken);
                 }
+                await ImportService.ProcessAsync(folderName, cancellationToken);
                 return Ok(fileName);
             }
             throw new HttpResponseException(System.Net.HttpStatusCode.BadRequest);

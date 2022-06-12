@@ -17,10 +17,10 @@ namespace Jibble.Employees
             public const string DateOfBirth = "Date of Birth";
 
             // Separator
-            public const string Separator = ",";
+            public const char Separator = ',';
 
             // Date format
-            public const string DateFormat = "MM/dd/yyyy";
+            public const string DateFormat = "M/d/yyyy";
         }
     }
 }

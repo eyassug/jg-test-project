@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Jibble.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Jibble
 {
@@ -8,6 +9,7 @@ namespace Jibble
         {
             services.AddScoped<EmployeeDbContext>();
             services.AddScoped<Employees.IEmployeeRepository, Employees.EmployeeRepository>();
+            services.AddScoped<ICSVImportService, CSVImportService>();
         }
     }
 }
