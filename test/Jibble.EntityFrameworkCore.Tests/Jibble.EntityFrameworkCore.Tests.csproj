@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Jibble</RootNamespace>
-    <RootNamespace>Jibble</RootNamespace>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
