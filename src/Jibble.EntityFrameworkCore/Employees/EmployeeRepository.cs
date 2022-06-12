@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -23,19 +24,19 @@ namespace Jibble.Employees
             throw new NotImplementedException();
         }
 
-        public Task<Employee> GetAsync(int id, CancellationToken cancellationToken = default)
+        public async Task<Employee> GetAsync(int id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await Context.Employees.SingleOrDefaultAsync(x => x.Id == id, cancellationToken: cancellationToken);           
         }
 
-        public Task<IEnumerable<Employee>> GetListAsync(Expression<Func<Employee, bool>> predicate, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Employee>> GetListAsync(Expression<Func<Employee, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await Context.Employees.Where(predicate).ToListAsync(cancellationToken);
         }
 
         public Task<IQueryable<Employee>> GetQueryableAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(Context.Employees.AsQueryable());
         }
 
         public Task<Employee> InsertAsync(Employee employee, CancellationToken cancellationToken = default)
@@ -43,9 +44,12 @@ namespace Jibble.Employees
             throw new NotImplementedException();
         }
 
-        public Task<Employee> UpdateAsync(Employee employee, CancellationToken cancellationToken = default)
+        public async Task<Employee> UpdateAsync(Employee employee, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            Context.Employees.Attach(employee);
+            Context.Entry(employee).State = EntityState.Modified;
+            await Context.SaveChangesAsync(cancellationToken);
+            return employee;
         }
     }
 }
