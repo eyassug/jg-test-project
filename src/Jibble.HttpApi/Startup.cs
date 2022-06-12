@@ -41,7 +41,6 @@ namespace Jibble.HttpApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Jibble.HttpApi", Version = "v1" });
             });
 
-            Console.WriteLine($"Using EFCore connection string: {Configuration.GetConnectionString("Default")}");
             // Configure DbContext
             services.AddDbContext<EmployeeDbContext>(
                     options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
