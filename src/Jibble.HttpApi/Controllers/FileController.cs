@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -12,9 +13,11 @@ namespace Jibble.Controllers
     public class FileController : ControllerBase
     {
         Services.ICSVImportService ImportService { get; }
-        public FileController(Services.ICSVImportService cSVImportService)
+        IMediator Mediator { get; }
+        public FileController(Services.ICSVImportService cSVImportService, IMediator mediator)
         {
             ImportService = cSVImportService;
+            Mediator = mediator;
         }
         // POST api/files
         [HttpPost]
@@ -36,7 +39,7 @@ namespace Jibble.Controllers
                 var fileName = Path.Combine(folderName, Path.GetFileName(file.FileName));
                 Console.WriteLine($"Uploading {fileName}");
                 var filePath = fileName;
-
+                await Mediator.Send(new Commands.UploadFileCommand { FileInfo = file });
                 using (var stream = System.IO.File.Create(filePath))
                 {
                     await file.CopyToAsync(stream, cancellationToken);

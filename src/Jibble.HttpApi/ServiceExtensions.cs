@@ -1,4 +1,6 @@
-﻿using Jibble.Services;
+﻿using Jibble.HttpApi;
+using Jibble.Services;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Jibble
@@ -10,6 +12,11 @@ namespace Jibble
             services.AddScoped<EmployeeDbContext>();
             services.AddScoped<Employees.IEmployeeRepository, Employees.EmployeeRepository>();
             services.AddScoped<ICSVImportService, CSVImportService>();
+        }
+
+        public static void ConfigureMediatR(this IServiceCollection services)
+        {
+            services.AddMediatR(typeof(Startup));
         }
     }
 }
