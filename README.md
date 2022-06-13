@@ -4,6 +4,10 @@
 - `docker-compose build`
 - `docker-compose up -d`
 
+### Browse to:
+- Web API <https://localhost:8001/swagger>
+- Front End <https://localhost:8881>
+
 ## Visual Studio Debug
 - Choose `docker-compose` profile
 - Debug
