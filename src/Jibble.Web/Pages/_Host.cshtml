@@ -15,6 +15,22 @@
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="css/site.css" rel="stylesheet" />
     <link href="Jibble.Web.styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/xspreadsheet.css">
+    <style>
+#drop{
+	border:2px dashed #bbb;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	padding:25px;
+	text-align:center;
+	font:20pt bold,"Vollkorn";color:#bbb
+}
+#b64data{
+	width:100%;
+}
+a { text-decoration: none }
+</style>
 </head>
 <body>
     <component type="typeof(App)" render-mode="ServerPrerendered" />
@@ -31,6 +47,10 @@
     </div>
 
     <script src="_framework/blazor.server.js"></script>
+    <script src="js/xspreadsheet.js"></script>
+    <script src="js/shim.js"></script>
+<script src="js/xlsx.full.min.js"></script>
+<script src="js/xlsxspread.js"></script>
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/employees.js"></script>

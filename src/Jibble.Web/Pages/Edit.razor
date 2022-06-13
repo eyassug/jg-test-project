@@ -1,7 +1,21 @@
 ﻿@page "/edit";
+@inject IJSRuntime JsRuntime
 
 <h3>Edit CSV</h3>
 
+<input type="file" name="xlfile" id="xlf" accept=".csv, .xlsx" /> ... or click here to select a file
+<div id="drop">Drop a spreadsheet file here to see sheet data</div>
+
+
+<p><input type="button" value="Download Edited" id="xport"></p>
+<div id="htmlout"></div>
+
 @code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRuntime.InvokeVoidAsync("onEditReady");
+        await base.OnAfterRenderAsync(firstRender);
+    }
 
 }
