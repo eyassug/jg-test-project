@@ -75,11 +75,7 @@ namespace Jibble.HttpApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Jibble.HttpApi v1"));
             }
 
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<EmployeeDbContext>();
-                context.Database.EnsureCreated();
-            }
+            
 
             app.UseHttpsRedirection();
 
@@ -93,9 +89,14 @@ namespace Jibble.HttpApi
             });
             app.UseHangfireDashboard("/jobs", new DashboardOptions
             {
-                IsReadOnlyFunc = (DashboardContext context) => true
+                // Remove authorization for dashboard
+                Authorization = new[] { new HangfireNoAuthorizationFilter() }
             });
-
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<EmployeeDbContext>();
+                context.Database.Migrate();
+            }
         }
     }
 }

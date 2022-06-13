@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Hangfire;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
+using Hangfire.Dashboard;
 
 namespace Jibble
 {
@@ -41,6 +42,15 @@ namespace Jibble
                 x.UseSqlServerStorage(configuration.GetConnectionString("Hangfire"));
             });
             services.AddHangfireServer();
+        }
+    }
+
+    public class HangfireNoAuthorizationFilter : IDashboardAuthorizationFilter
+    {
+        public bool Authorize(DashboardContext context)
+        {
+            // Allow unauthorized access to Dashboard
+            return true;
         }
     }
 }
