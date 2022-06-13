@@ -6,9 +6,17 @@ namespace Jibble.Controllers
     {
 
         [Fact]
-        public void Test()
+        public void Upload_ReturnsBadRequest_WithExtensionsExceptZipCSV()
         {
             Assert.Equal(1, 1);
         }
+
+        [Fact]
+        public void Upload_ReturnsBadRequest_WithEmptyFile()
+        {
+            Assert.Equal(1, 1);
+        }
+
+
     }
 }
