@@ -13,3 +13,11 @@ services:
     environment:
       SA_PASSWORD: "jibble"
       ACCEPT_EULA: "Y"
+  jibble.web:
+    image: ${DOCKER_REGISTRY-}jibbleweb
+    build:
+      context: .
+      dockerfile: src/Jibble.Web/Dockerfile
+    depends_on:
+      - jibble.httpapi
+

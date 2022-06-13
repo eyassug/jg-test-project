@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jibble.HttpApi.Tests", "tes
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{EFFAD5AB-ADA3-4D5A-BAC5-E41691090582}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jibble.Web", "src\Jibble.Web\Jibble.Web.csproj", "{32EE3436-3BDE-4CD1-99FA-EFDC62CE9E30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{EFFAD5AB-ADA3-4D5A-BAC5-E41691090582}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFFAD5AB-ADA3-4D5A-BAC5-E41691090582}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFFAD5AB-ADA3-4D5A-BAC5-E41691090582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32EE3436-3BDE-4CD1-99FA-EFDC62CE9E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32EE3436-3BDE-4CD1-99FA-EFDC62CE9E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32EE3436-3BDE-4CD1-99FA-EFDC62CE9E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32EE3436-3BDE-4CD1-99FA-EFDC62CE9E30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{2744517A-7CED-45E2-A1DB-E47CA1FE646C} = {03C12EF0-A849-4167-BD08-571088C8AC6B}
 		{FDDB01FA-3CAA-456D-A2A6-E347FD5D820C} = {9378EA38-C225-436D-B78C-9C9752523130}
 		{6187C477-CA7E-4DEA-8702-E451E6AB4A21} = {9378EA38-C225-436D-B78C-9C9752523130}
+		{32EE3436-3BDE-4CD1-99FA-EFDC62CE9E30} = {03C12EF0-A849-4167-BD08-571088C8AC6B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {951A22C4-41E9-49A7-8059-80236A093704}
