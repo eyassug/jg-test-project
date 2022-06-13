@@ -11,7 +11,7 @@ services:
   db:
     image: "mcr.microsoft.com/mssql/server"
     environment:
-      SA_PASSWORD: "jibble"
+      SA_PASSWORD: "JtWY_8Gw7uZsUX"
       ACCEPT_EULA: "Y"
   jibble.web:
     image: ${DOCKER_REGISTRY-}jibbleweb

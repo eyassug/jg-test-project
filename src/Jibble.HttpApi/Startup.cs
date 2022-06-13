@@ -53,7 +53,8 @@ namespace Jibble.HttpApi
 
             // Configure DbContext
             services.AddDbContext<EmployeeDbContext>(
-                    options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+                    options => options.UseSqlServer(Configuration.GetConnectionString("Default"),
+                    opts => opts.MigrationsAssembly("Jibble.EntityFrameworkCore")));
 
             services.ConfigureRepositories();
             services.ConfigureMediatR();
@@ -72,6 +73,12 @@ namespace Jibble.HttpApi
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Jibble.HttpApi v1"));
+            }
+
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<EmployeeDbContext>();
+                context.Database.EnsureCreated();
             }
 
             app.UseHttpsRedirection();

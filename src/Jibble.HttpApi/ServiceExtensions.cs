@@ -38,7 +38,7 @@ namespace Jibble
         {
             services.AddHangfire(x =>
             {
-                x.UseSqlServerStorage(configuration.GetConnectionString("Default"));
+                x.UseSqlServerStorage(configuration.GetConnectionString("Hangfire"));
             });
             services.AddHangfireServer();
         }
