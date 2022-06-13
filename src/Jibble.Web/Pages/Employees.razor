@@ -1,0 +1,19 @@
+﻿@page "/list";
+@inject IJSRuntime JsRuntime
+
+<h3>Employees</h3>
+
+
+<table id="tblEmployees" class="table table-bordered">
+
+</table>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRuntime.InvokeVoidAsync("onEmployeesReady");
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+}
+

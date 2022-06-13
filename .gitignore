@@ -2,3 +2,6 @@ src/Jibble.HttpApi/files/
 obj/
 bin/
 .vs/
+.csproj.user
+launchSettings.json
+src/Jibble.Web/Jibble.Web.csproj.user
