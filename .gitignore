@@ -1,3 +1,4 @@
 src/Jibble.HttpApi/files/
 obj/
 bin/
+.vs/
