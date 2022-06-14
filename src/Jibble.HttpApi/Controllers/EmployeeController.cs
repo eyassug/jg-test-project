@@ -48,9 +48,18 @@ namespace Jibble.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public Task<IActionResult> UpdateAsync(int id, [FromBody] EmployeeDto employee)
+        public async Task<IActionResult> UpdateAsync(int id, [FromBody] EmployeeDto employee, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var entity = Mapper.Map<Employee>(employee);
+            try
+            {
+                await Repository.UpdateAsync(entity, cancellationToken);
+                return Ok();
+            }
+            catch (ArgumentException)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
         }
 
         // DELETE api/<EmployeeController>/5
@@ -59,9 +68,16 @@ namespace Jibble.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(400)]
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await Repository.DeleteAsync(id, cancellationToken);
+            }
+            catch (ArgumentException)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
         }
     }
 }
