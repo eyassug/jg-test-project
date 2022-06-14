@@ -45,8 +45,8 @@ namespace Jibble.Employees
 
         public async Task<Employee> UpdateAsync(Employee employee, CancellationToken cancellationToken = default)
         {
-            var existing = await GetAsync(employee.Id);
-            if (existing is null) throw new ArgumentException();
+            var exists = Context.Employees.Any(x => x.Id == employee.Id);
+            if (!exists) throw new ArgumentException();
             Context.Employees.Attach(employee);
             Context.Entry(employee).State = EntityState.Modified;
             await Context.SaveChangesAsync(cancellationToken);
