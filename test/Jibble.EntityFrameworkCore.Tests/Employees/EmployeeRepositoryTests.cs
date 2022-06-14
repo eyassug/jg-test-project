@@ -56,8 +56,7 @@ namespace Jibble.Employees
 
             var nonExisting = await repository.GetAsync(id);
             Assert.Null(nonExisting);
-            await repository.DeleteAsync(id);
-            await Assert.ThrowsAsync<ArgumentException>(async () => await repository.DeleteAsync(id));
+            await Assert.ThrowsAsync<ArgumentException>(async() => await repository.DeleteAsync(id));
 
         }
 
@@ -104,7 +103,6 @@ namespace Jibble.Employees
 
             // Act
 
-            await repository.DeleteAsync(id);
             await Assert.ThrowsAsync<ArgumentException>(async () => await repository.UpdateAsync(new Employee
             {
                 Id = id,
