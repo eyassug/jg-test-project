@@ -18,42 +18,5 @@
         await JsRuntime.InvokeVoidAsync("onUploadReady");
         await base.OnAfterRenderAsync(firstRender);
     }
-
-    async Task HandleSelection(InputFileChangeEventArgs e)
-    {
-        var client = new HttpClient();
-        var file = e.GetMultipleFiles().FirstOrDefault();
-        if (file != null)
-        {
-            var gg = File.ReadAllBytes(file.Name);
-            var byteArrayContent = new ByteArrayContent(gg);
-            var fileContent = 
-                        new StreamContent(file.OpenReadStream(int.MaxValue));
-            fileContent.Headers.ContentType = 
-                    new MediaTypeHeaderValue(file.ContentType);
-            //var content = new MultipartFormDataContent();
-            //content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
-            //content.Add(fileContent, "\"files\"", file.Name);
-            try
-            {
-                var response = await client.PostAsync("https://localhost:8001/api/files", new MultipartFormDataContent
-                {
-                    {byteArrayContent }
-                });
-                if(response.IsSuccessStatusCode)
-                {
-
-                }
-                else
-                {
-                    Console.WriteLine(response.Content);
-                }
-            }
-            catch(Exception ex)
-            {
-                    
-            }
-        }
-    }
 }
 
