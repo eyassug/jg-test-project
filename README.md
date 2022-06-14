@@ -7,6 +7,7 @@
 ### Browse to:
 - Web API <https://localhost:8001/swagger>
 - Front End <https://localhost:8881>
+- Hangfire <https://localhost:8001/jobs>
 
 ## Visual Studio Debug
 - Choose `docker-compose` profile
@@ -15,7 +16,7 @@
 # Architecture
 ## Back-End
 - ASP.NET Core Web API
-- EF Core with SQL Server Storage
+- EF Core with MS SQL Server
 ## Front-End
 - Blazor Server (jquery, SpreadsheetJS)
 
@@ -24,6 +25,7 @@
 - MediatR - for file upload
 - Hangfire - to offload csv processing to a background job after successful upload (faster response time for upload API requests)
 - ETL.NET with SQL Server sink - stream processing
+
 ## Unit/Integration Tests
 - Moq
 - Xunit
