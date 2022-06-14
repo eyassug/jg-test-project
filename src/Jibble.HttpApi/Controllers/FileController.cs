@@ -12,11 +12,9 @@ namespace Jibble.Controllers
     [ApiController]
     public class FileController : ControllerBase
     {
-        Services.ICSVImportService ImportService { get; }
         IMediator Mediator { get; }
-        public FileController(Services.ICSVImportService cSVImportService, IMediator mediator)
+        public FileController(IMediator mediator)
         {
-            ImportService = cSVImportService;
             Mediator = mediator;
         }
         // POST api/files
