@@ -53,8 +53,7 @@ namespace Jibble.HttpApi
 
             // Configure DbContext
             services.AddDbContext<EmployeeDbContext>(
-                    options => options.UseSqlServer(Configuration.GetConnectionString("Default"),
-                    opts => opts.MigrationsAssembly("Jibble.EntityFrameworkCore")));
+                    options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.ConfigureRepositories();
             services.ConfigureMediatR();
