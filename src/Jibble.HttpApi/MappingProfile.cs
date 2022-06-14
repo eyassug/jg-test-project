@@ -6,7 +6,7 @@ namespace Jibble
     {
         public MappingProfile()
         {
-            CreateMap<Employees.Employee, Employees.EmployeeDto>();
+            CreateMap<Employees.Employee, Employees.EmployeeDto>().ReverseMap();
         }
     }
 }

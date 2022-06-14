@@ -51,6 +51,7 @@ namespace Jibble.Controllers
         public async Task<IActionResult> UpdateAsync(int id, [FromBody] EmployeeDto employee, CancellationToken cancellationToken)
         {
             var entity = Mapper.Map<Employee>(employee);
+            entity.Id = id;
             try
             {
                 await Repository.UpdateAsync(entity, cancellationToken);
