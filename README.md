@@ -22,10 +22,10 @@
 
 # Libraries Used
 - Automapper
-- MediatR - for file upload
+- MediatR - for CQRS-esque Request/Response
 - Hangfire - to offload csv processing to a background job after successful upload (faster response time for upload API requests)
 - ETL.NET with SQL Server sink - stream processing
 
 ## Unit/Integration Tests
-- Moq
 - Xunit
+- WebApplicationFactory - Integration Tests

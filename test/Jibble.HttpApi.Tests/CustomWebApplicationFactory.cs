@@ -27,7 +27,8 @@ namespace Jibble
 
                 services.AddDbContext<EmployeeDbContext>(options =>
                 {
-                    options.UseInMemoryDatabase("InMemoryDb");
+                    // Use a valid SQL Server connection string
+                    options.UseSqlServer(@"Server=localhost\SQLEXPRESS;Database=employeedb;Trusted_Connection=True;");
                 });
 
                 var sp = services.BuildServiceProvider();
