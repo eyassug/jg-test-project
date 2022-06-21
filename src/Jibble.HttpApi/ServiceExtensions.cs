@@ -6,6 +6,8 @@ using Hangfire;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using Hangfire.Dashboard;
+using System.Linq;
+using System.Data.SqlClient;
 
 namespace Jibble
 {
@@ -37,11 +39,48 @@ namespace Jibble
 
         public static void ConfigureHangfire(this IServiceCollection services, IConfiguration configuration)
         {
+            const string masterDb = "master";
+            // Add helper to create an empty database as Hangfire requires an existing db
+            var connectionString = configuration.GetConnectionString("Hangfire");
+            var builder = new SqlConnectionStringBuilder(connectionString);
+
+            // store 
+            var hanfireDbName = builder.InitialCatalog;
+
+            builder.InitialCatalog = masterDb;
+
+
+            using (var cnx = new SqlConnection(builder.ConnectionString))
+            {
+                cnx.Open();
+
+                using (var command = new SqlCommand(string.Format(
+                    @"IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'{0}') 
+                                    create database [{0}];
+                      ", hanfireDbName), cnx))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+            
             services.AddHangfire(x =>
             {
-                x.UseSqlServerStorage(configuration.GetConnectionString("Hangfire"));
+                x.UseSqlServerStorage(connectionString);
             });
             services.AddHangfireServer();
+        }
+
+        public static bool DbExists(this EmployeeDbContext ctx)
+        {
+            try
+            {
+                ctx.Employees.Count();
+                return true;
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
         }
     }
 

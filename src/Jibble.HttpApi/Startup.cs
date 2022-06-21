@@ -52,8 +52,10 @@ namespace Jibble.HttpApi
             });
 
             // Configure DbContext
+            var connectionString = Configuration.GetConnectionString("Default");
             services.AddDbContext<EmployeeDbContext>(
-                    options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+                    options => options.UseSqlServer(connectionString,
+                                x => x.MigrationsAssembly("Jibble.EntityFrameworkCore")));
 
             services.ConfigureRepositories();
             services.ConfigureMediatR();
@@ -66,7 +68,12 @@ namespace Jibble.HttpApi
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors();
-            
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<EmployeeDbContext>();
+                context.Database.Migrate();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -91,11 +98,6 @@ namespace Jibble.HttpApi
                 // Remove authorization for dashboard
                 Authorization = new[] { new HangfireNoAuthorizationFilter() }
             });
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<EmployeeDbContext>();
-                context.Database.Migrate();
-            }
         }
     }
 }
