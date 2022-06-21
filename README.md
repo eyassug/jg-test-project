@@ -9,7 +9,26 @@
 - Front End <https://localhost:8881>
 - Hangfire <https://localhost:8001/jobs>
 
-## Visual Studio Debug
+## Visual Studio Debug (local)
+- Update connection string to a valid SQL Server connection (LocalDb, SQLEXPRESS ...): No need to create database as it will be automatically created.
+`"ConnectionStrings": {
+    "Default": "Server=localhost\\SQLEXPRESS;Database=employees;Trusted_Connection=True;",
+    "Hangfire": "Server=localhost\\SQLEXPRESS;Database=employees;Trusted_Connection=True;"
+  },`
+- Set multiple Start-up projects
+- Choose Jibble.HttpApi and Jibble.Web Projects
+
+## `dotnet run`
+- Update connection string to a valid SQL Server connection (LocalDb, SQLEXPRESS ...): No need to create database as it will be automatically created.
+`"ConnectionStrings": {
+    "Default": "Server=localhost\\SQLEXPRESS;Database=employees;Trusted_Connection=True;",
+    "Hangfire": "Server=localhost\\SQLEXPRESS;Database=employees;Trusted_Connection=True;"
+  },`
+- `cd` to `Jibble.HttpApi` and `Jibble.Web`
+- `dotnet run`
+
+- Launch
+## Visual Studio Debug (docker-compose)
 - Choose `docker-compose` profile
 - Debug
 
