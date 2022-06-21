@@ -10,7 +10,9 @@
 - Hangfire <https://localhost:8001/jobs>
 
 ## Visual Studio Debug (local)
-- Update connection string to a valid SQL Server connection (LocalDb, SQLEXPRESS ...): No need to create database as it will be automatically created.
+
+- Update connection strings in `appsettings.json` to a valid SQL Server connection (LocalDb, SQLEXPRESS ...): No need to create database as it will be automatically created.
+
 `"ConnectionStrings": {
     "Default": "Server=localhost\\SQLEXPRESS;Database=employees;Trusted_Connection=True;",
     "Hangfire": "Server=localhost\\SQLEXPRESS;Database=employees;Trusted_Connection=True;"
@@ -19,7 +21,8 @@
 - Choose Jibble.HttpApi and Jibble.Web Projects
 
 ## `dotnet run`
-- Update connection string to a valid SQL Server connection (LocalDb, SQLEXPRESS ...): No need to create database as it will be automatically created.
+- Update connection strings in `appsettings.json`  to a valid SQL Server connection (LocalDb, SQLEXPRESS ...): No need to create database as it will be automatically created.
+
 `"ConnectionStrings": {
     "Default": "Server=localhost\\SQLEXPRESS;Database=employees;Trusted_Connection=True;",
     "Hangfire": "Server=localhost\\SQLEXPRESS;Database=employees;Trusted_Connection=True;"
